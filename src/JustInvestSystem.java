@@ -1,18 +1,21 @@
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 public class JustInvestSystem
 {
     PasswordGenerator passwordGenerator;
     boolean userHasAccess = false;
+    Client client;
 
 
     public JustInvestSystem(){
         passwordGenerator = new PasswordGenerator();
+        client = new Client();
     }
 
-    public void userSignUp(String username,String password) throws NoSuchAlgorithmException, IOException {
+    public void userSignUp(String username,String password, int role) throws NoSuchAlgorithmException, IOException {
 
         boolean len= false, uppercase= false, numerical= false, lowercase = false, specialChar = false, denylist = false ,usernameMatching = false;
 
@@ -76,15 +79,20 @@ public class JustInvestSystem
         if (len && uppercase && numerical && lowercase && specialChar && usernameMatching && denylist && !userAlreadyExists(username)){
 
             String salt= passwordGenerator.createSalt();
-            String writtenString = username+","+salt+","+passwordGenerator.hashedPasswordWithSaltChecker(password,salt);
+            String writtenString = username+","+salt+","+passwordGenerator.hashedPasswordWithSaltChecker(password,salt)+","+role;
 
             //if the conditions are met, create a new user.
             BufferedWriter writer = new BufferedWriter(new FileWriter("passwd.txt", true));
                     writer.write(writtenString);
                     writer.newLine();
                     System.out.println("User Created Successfully!");
-                    writer.close();
+                    System.out.println("\033[92mPlease Login with the user You Created\033[0m");
 
+                    if (role == 1 || role == 2){
+                        client.addUserBalance(username);
+                    }
+
+                    writer.close();
         }
         else {
 
@@ -93,7 +101,6 @@ public class JustInvestSystem
 
     }
 
-
     public void userLogin(String username, String password) throws IOException, NoSuchAlgorithmException {
 
         BufferedReader reader = new BufferedReader(new FileReader("passwd.txt"));
@@ -101,9 +108,7 @@ public class JustInvestSystem
         boolean foundUser = false;
 
         while ((line = reader.readLine()) != null) {
-
             String[] userInfo = line.split(",");
-
             String fileUserName = userInfo[0];
             String fileSalt = userInfo[1];
             String hashedPass = userInfo[2];
@@ -118,13 +123,41 @@ public class JustInvestSystem
                         System.out.println("ACCESS DENIED");
                     }
                 }
-
         }
 
         if(!foundUser) {
             System.out.println("User Not Found!");
         }
+    }
 
+
+
+    //Returns the role of the user
+    public int userRole(String username) throws IOException {
+
+        BufferedReader reader = new BufferedReader(new FileReader("passwd.txt"));
+        String line;
+        boolean foundUser = false;
+
+        int role = 0;
+        while ((line = reader.readLine()) != null) {
+
+            String[] userInfo = line.split(",");
+
+            String fileUserName = userInfo[0];
+            String userRole = userInfo[3];
+
+            if (username.equals(fileUserName)) {
+                foundUser = true;
+                role = Integer.parseInt(userRole);
+            }
+        }
+
+        if (!foundUser) {
+            System.out.println("User Not Found!");
+        }
+
+        return role;
     }
 
     public boolean UserHasAccess() {
@@ -166,13 +199,19 @@ public class JustInvestSystem
         return usernameExists;
     }
 
+//    public void viewBalance(String username){
+//        int balance = 0;
+//        System.out.println("Your account balance is: "+balance+"$");
+//    }
+
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
         JustInvestSystem sys = new JustInvestSystem();
         //sys.systemIntro();
 
+        //System.out.println(sys.userRole("jalal"));
 
-        sys.userSignUp("Jalali","Jalal123!");
+        //sys.userSignUp("Jalali","Jalal123!");
         //sys.userSignUp("Alexw","Test12wz$");
 
         //System.out.println(sys.userAlreadyExists("Jalalo"));
