@@ -2,12 +2,12 @@ public class Client {
 
     String name;
     int balance;
-    int accessType;
+    int role;
 
-    public Client(String name, int balance, int accessType){
+    public Client(String name, int balance, int role){
         this.name = name;
         this.balance = balance;
-        this.accessType = accessType;
+        this.role = role;
     }
 
 
