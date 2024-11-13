@@ -1,3 +1,6 @@
 adisor,AdvisorTEST,123456,3
 samantha,samanthaSmith,14626372,3
 financialPlanner,FinancialPlanner,1234556,4
+planner,Planner,123456,4
+advisor,jalal,12345,3
+adv,jalal,123,3

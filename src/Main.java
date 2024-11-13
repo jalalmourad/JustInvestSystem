@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 
-        PasswordGenerator passwordGenerator = new PasswordGenerator();
         JustInvestSystem system = new JustInvestSystem();
 
         Scanner sc = new Scanner(System.in);
@@ -73,8 +72,6 @@ public class Main {
                 System.out.println("\033[1mUser role is a \033[1;97mTeller\033[0m\033[0m");
             }
 
-
-
         }
 
         if (access == 2){
@@ -91,52 +88,62 @@ public class Main {
 
                 //If user is a Client
                 while (system.userRole(username) == 1){
-                    System.out.println("Your Authorized Operations Are: 1, 2, 4");
-                    System.out.println("Enter 0 to Log out");
-                    System.out.println("Which operations would you like to perform?");
+                    System.out.println(username+" is logged in as: Client");
+                    Client client = new Client();
+                    System.out.println("Your Authorized Operations Are: "+client.clientPermissions());
+                    system.printInfo();
                     int operation = sc.nextInt();
                     sc.nextLine();
-                    Client client = new Client();
-                    if (operation == 1){
-                        client.viewUserBalance(username);
-                    }
-                    if (operation== 2){
-                        client.viewInvestmentPortfolio(username);
-                    }
-                    if (operation == 4){
-                        employee.getFinancialAdvisorDetails(username);
-                    }
-                    if (operation == 0){
-                        System.out.println("User: "+username+" is successfully logged out");
-                        break;
-                    }
+                    client.clientAccessControl(operation,username);
                 }
-
                 //If user is a Premium Client
                 while (system.userRole(username) == 2){
-                    System.out.println("Your Authorized Operations Are: 3, 5");
-                    System.out.println("Enter 0 to Log out");
-                    System.out.println("Which operations would you like to perform?");
+                    System.out.println(username+" is logged in as: Premium Client");
+                    Client client = new Client();
+                    System.out.println("Your Authorized Operations Are: "+ client.premiumClientPermissions());
+                    system.printInfo();
                     int operation = sc.nextInt();
                     sc.nextLine();
-                    Client client = new Client();
 
-                    if (operation == 3){
-                        //TODO
-                    }
+                   client.premiumClientAccessControl(operation,username);
+                }
 
-                    if (operation == 5){
-                        employee.getFinancialPlannerDetails(username);
-                    }
-                    if (operation == 0){
-                        System.out.println("User: "+username+" is successfully logged out");
-                        break;
-                    }
+                while (system.userRole(username) == 3){
+                    System.out.println(username+" is logged in as: Financial Advisor");
+                    System.out.println("Your Authorized Operations Are: "+ employee.permissions(system.userRole(username)));
+                    system.printInfo();
+                    int operation = sc.nextInt();
+                    sc.nextLine();
+
+                    employee.financialAdvisorAccessControl(operation,username);
+                }
+
+                while (system.userRole(username) == 4){
+                    System.out.println(username+" is logged in as: Financial Planner");
+                    System.out.println("Your Authorized Operations Are: "+ employee.permissions(system.userRole(username)));
+                    system.printInfo();
+                    int operation = sc.nextInt();
+                    sc.nextLine();
+
+                    employee.financialPlannerAccessControl(operation,username);
+                }
+
+                while (system.userRole(username) == 5){
+                    System.out.println(username+" is logged in as: Teller");
+                    System.out.println("Your Authorized Operations Are: "+ employee.permissions(system.userRole(username)));
+                    system.printInfo();
+                    int operation = sc.nextInt();
+                    sc.nextLine();
+
+                    employee.tellerAccessControl(operation,username);
                 }
 
 
             }
 
+        }
+        else {
+            System.out.println("Invalid Input!");
         }
 
 

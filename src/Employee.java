@@ -10,6 +10,33 @@ public class Employee {
     }
 
 
+    public String returnPermission(int permissionIndex){
+        ArrayList<String> permissions = new ArrayList<>();
+        permissions.add("View account balance");
+        permissions.add("View investment portfolio");
+        permissions.add("Modify investment portfolio");
+        permissions.add("View Financial Advisor contact info");
+        permissions.add("View Financial Planner contact info");
+        permissions.add("View money market instruments");
+        permissions.add("View private consumer instruments");
+        return permissions.get(permissionIndex);
+    }
+
+    public String returnPermissionID(int permissionIndex){
+        ArrayList<String> permissions = new ArrayList<>();
+        permissions.add("1");
+        permissions.add("2");
+        permissions.add("3");
+        permissions.add("4");
+        permissions.add("5");
+        permissions.add("6");
+        permissions.add("7");
+        return permissions.get(permissionIndex);
+    }
+
+
+
+
     //Assigns a random Financial Advisor to a client
     public void returnRandomFinancialAdvisor(String username) throws IOException {
 
@@ -93,58 +120,81 @@ public class Employee {
         financialAdvisorAllocation.close();
     }
 
-    public void getFinancialAdvisorDetails(String username) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("viewClientFinancialAdvisor.txt"));
-        String line;
-        boolean foundUser = false;
 
-        while ((line = reader.readLine()) != null) {
-
-            String[] userInfo = line.split(",");
-
-            String Userusername = userInfo[0];
-            String fileUserName = userInfo[1];
-            String fileName = userInfo[2];
-            String filePhoneNumber = userInfo[3];
-
-            if (username.equals(Userusername)) {
-                foundUser = true;
-                System.out.println("Financial advisor for user: "+username+" is: "+fileName);
-                System.out.println(fileName+"'s phone number is: "+filePhoneNumber);
-            }
+    public void financialAdvisorAccessControl(int operation, String username) throws IOException {
+        if (operation == 1){
+            System.out.println("Permission GRANTED to View account balance");
         }
-        if (!foundUser) {
-            System.out.println("(getFinancialAdvisorDetails) User Not Found!");
+        if (operation == 2){
+            System.out.println("Permission GRANTED to View investment portfolio");
+        }
+        if (operation == 3){
+            System.out.println("Permission GRANTED to Modify investment portfolio");
         }
 
+        if (operation == 7){
+            System.out.println("Permission GRANTED to View private consumer instruments");
+        }
+        if (operation == 0){
+            System.out.println("User: "+username+" is successfully logged out");
+            System.exit(0);}}
 
+
+
+
+
+    public void financialPlannerAccessControl(int operation, String username) throws IOException {
+        if (operation == 1){
+            System.out.println("Permission GRANTED to View account balance");
+        }
+        if (operation == 2){
+            System.out.println("Permission GRANTED to View investment portfolio");
+        }
+        if (operation == 3){
+            System.out.println("Permission GRANTED to Modify investment portfolio");
+        }
+        if (operation == 6){
+            System.out.println("Permission GRANTED to View money market instruments");
+        }
+        if (operation == 7){
+            System.out.println("Permission GRANTED to View private consumer instruments");
+        }
+        if (operation == 0){
+            System.out.println("User: "+username+" is successfully logged out");
+            System.exit(0);}}
+
+
+    public String permissions(int userID){
+        if (userID == 3){
+            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(6);
+        }
+        if (userID == 4){
+            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(5)+", "+returnPermissionID(6);
+        }
+        if (userID == 5){
+            return returnPermissionID(0)+", "+returnPermissionID(1);
+        }
+        return "No Permissions";
     }
 
-    public void getFinancialPlannerDetails(String username) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("viewPremiumClientFinancialPlanner.txt"));
-        String line;
-        boolean foundUser = false;
 
-        while ((line = reader.readLine()) != null) {
 
-            String[] userInfo = line.split(",");
 
-            String Userusername = userInfo[0];
-            String fileName = userInfo[2];
-            String filePhoneNumber = userInfo[3];
-
-            if (username.equals(Userusername)) {
-                foundUser = true;
-                System.out.println("Financial planner for user: "+username+" is: "+fileName);
-                System.out.println(fileName+"'s phone number is: "+filePhoneNumber);
-            }
+    public void tellerAccessControl(int operation, String username) throws IOException {
+        if (operation == 1){
+            System.out.println("Permission GRANTED to View account balance");
         }
-        if (!foundUser) {
-            System.out.println("(getFinancialPlannerDetails) User Not Found!");
+        if (operation == 2){
+            System.out.println("Permission GRANTED to View investment portfolio");
         }
 
+        if (operation == 0){
+            System.out.println("User: "+username+" is successfully logged out");
+            System.exit(0);}}
 
-    }
+
+
+
 
 
     public static void main(String[] args) throws IOException {

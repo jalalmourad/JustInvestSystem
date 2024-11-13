@@ -187,6 +187,11 @@ public class JustInvestSystem
                 "7. View private consumer instruments");
     }
 
+    public void printInfo(){
+        System.out.println("Enter 0 to Log out");
+        System.out.println("Which operations would you like to perform?");
+    }
+
     public boolean userAlreadyExists(String username) throws IOException {
 
         boolean usernameExists = false;
