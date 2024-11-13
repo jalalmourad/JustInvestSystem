@@ -9,7 +9,6 @@ public class Client {
         balance = 0;
     }
 
-
     public void addUserBalance(String username) throws IOException {
         Random rand = new Random();
         int balance = rand.nextInt(10000);

@@ -8,11 +8,13 @@ public class JustInvestSystem
     PasswordGenerator passwordGenerator;
     boolean userHasAccess = false;
     Client client;
+    Employee employee;
 
 
     public JustInvestSystem(){
         passwordGenerator = new PasswordGenerator();
         client = new Client();
+        employee = new Employee();
     }
 
     public void userSignUp(String username,String password, int role) throws NoSuchAlgorithmException, IOException {
@@ -90,6 +92,9 @@ public class JustInvestSystem
 
                     if (role == 1 || role == 2){
                         client.addUserBalance(username);
+                    }
+                    if (role == 1){
+                        employee.returnRandomFinancialAdvisor(username);
                     }
 
                     writer.close();
@@ -215,7 +220,6 @@ public class JustInvestSystem
         //sys.userSignUp("Alexw","Test12wz$");
 
         //System.out.println(sys.userAlreadyExists("Jalalo"));
-
         //sys.userLogin("Jalal","Jalal!123");
 
     }
