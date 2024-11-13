@@ -6,3 +6,4 @@ JalalTESTT,500
 Jalalmrad,931
 clientTest,7643
 client2,2265
+premium,675

@@ -96,6 +96,9 @@ public class JustInvestSystem
                     if (role == 1){
                         employee.returnRandomFinancialAdvisor(username);
                     }
+                    if (role == 2){
+                        employee.returnRandomFinancialPlanner(username);
+                    }
 
                     writer.close();
         }

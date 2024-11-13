@@ -52,7 +52,7 @@ public class Main {
                 System.out.println("Enter Your PhoneNumber: ");
                 String phoneNumber= sc.nextLine();
 
-                employee.contactDetailsFinancialAdv(username,name,phoneNumber,role);
+                employee.contactDetails(username,name,phoneNumber,role);
             }
 
             system.userSignUp(username,password,role);
@@ -110,9 +110,6 @@ public class Main {
                         System.out.println("User: "+username+" is successfully logged out");
                         break;
                     }
-                    else {
-                        System.out.println("\nYou cannot perform this operation");
-                    }
                 }
 
                 //If user is a Premium Client
@@ -125,18 +122,15 @@ public class Main {
                     Client client = new Client();
 
                     if (operation == 3){
-                        client.viewUserBalance(username);
+                        //TODO
                     }
 
                     if (operation == 5){
-                        employee.getFinancialAdvisorDetails(username);
+                        employee.getFinancialPlannerDetails(username);
                     }
                     if (operation == 0){
                         System.out.println("User: "+username+" is successfully logged out");
                         break;
-                    }
-                    else {
-                        System.out.println("\nYou cannot perform this operation");
                     }
                 }
 
