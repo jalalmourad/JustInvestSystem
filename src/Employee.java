@@ -9,34 +9,6 @@ public class Employee {
 
     }
 
-
-    public String returnPermission(int permissionIndex){
-        ArrayList<String> permissions = new ArrayList<>();
-        permissions.add("View account balance");
-        permissions.add("View investment portfolio");
-        permissions.add("Modify investment portfolio");
-        permissions.add("View Financial Advisor contact info");
-        permissions.add("View Financial Planner contact info");
-        permissions.add("View money market instruments");
-        permissions.add("View private consumer instruments");
-        return permissions.get(permissionIndex);
-    }
-
-    public String returnPermissionID(int permissionIndex){
-        ArrayList<String> permissions = new ArrayList<>();
-        permissions.add("1");
-        permissions.add("2");
-        permissions.add("3");
-        permissions.add("4");
-        permissions.add("5");
-        permissions.add("6");
-        permissions.add("7");
-        return permissions.get(permissionIndex);
-    }
-
-
-
-
     //Assigns a random Financial Advisor to a client
     public void returnRandomFinancialAdvisor(String username) throws IOException {
 
@@ -139,10 +111,6 @@ public class Employee {
             System.out.println("User: "+username+" is successfully logged out");
             System.exit(0);}}
 
-
-
-
-
     public void financialPlannerAccessControl(int operation, String username) throws IOException {
         if (operation == 1){
             System.out.println("Permission GRANTED to View account balance");
@@ -163,23 +131,6 @@ public class Employee {
             System.out.println("User: "+username+" is successfully logged out");
             System.exit(0);}}
 
-
-    public String permissions(int userID){
-        if (userID == 3){
-            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(6);
-        }
-        if (userID == 4){
-            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(5)+", "+returnPermissionID(6);
-        }
-        if (userID == 5){
-            return returnPermissionID(0)+", "+returnPermissionID(1);
-        }
-        return "No Permissions";
-    }
-
-
-
-
     public void tellerAccessControl(int operation, String username) throws IOException {
         if (operation == 1){
             System.out.println("Permission GRANTED to View account balance");
@@ -191,10 +142,6 @@ public class Employee {
         if (operation == 0){
             System.out.println("User: "+username+" is successfully logged out");
             System.exit(0);}}
-
-
-
-
 
 
     public static void main(String[] args) throws IOException {

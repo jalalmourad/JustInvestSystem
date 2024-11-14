@@ -4,3 +4,5 @@ financialPlanner,FinancialPlanner,1234556,4
 planner,Planner,123456,4
 advisor,jalal,12345,3
 adv,jalal,123,3
+jalalal,hahah,1234,3
+plany,plany,1245,4

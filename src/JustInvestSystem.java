@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class JustInvestSystem
@@ -187,6 +188,40 @@ public class JustInvestSystem
                 "7. View private consumer instruments");
     }
 
+
+
+    public String returnPermissionID(int permissionIndex){
+        ArrayList<String> permissions = new ArrayList<>();
+        permissions.add("1");
+        permissions.add("2");
+        permissions.add("3");
+        permissions.add("4");
+        permissions.add("5");
+        permissions.add("6");
+        permissions.add("7");
+        return permissions.get(permissionIndex);
+    }
+
+    //Assign permissions for users
+    public String permissions(int userID){
+        if (userID == 1){
+            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(3);
+        }
+        if (userID == 2){
+            return returnPermissionID(2)+", "+returnPermissionID(4);
+        }
+        if (userID == 3){
+            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(6);
+        }
+        if (userID == 4){
+            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(5)+", "+returnPermissionID(6);
+        }
+        if (userID == 5){
+            return returnPermissionID(0)+", "+returnPermissionID(1);
+        }
+        return "No Permissions";
+    }
+
     public void printInfo(){
         System.out.println("Enter 0 to Log out");
         System.out.println("Which operations would you like to perform?");
@@ -211,11 +246,6 @@ public class JustInvestSystem
         psswdReader.close();
         return usernameExists;
     }
-
-//    public void viewBalance(String username){
-//        int balance = 0;
-//        System.out.println("Your account balance is: "+balance+"$");
-//    }
 
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {

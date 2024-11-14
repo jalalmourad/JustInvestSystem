@@ -133,10 +133,6 @@ public class Client {
     }
 
 
-    public String premiumClientPermissions(){
-        return "3, 5";
-    }
-
     public void getFinancialPlannerDetails(String username) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("viewPremiumClientFinancialPlanner.txt"));
         String line;
@@ -162,11 +158,6 @@ public class Client {
 
 
     }
-
-    public String clientPermissions(){
-        return "1, 2, 4";
-    }
-
 
 
 }
