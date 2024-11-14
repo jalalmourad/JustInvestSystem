@@ -103,7 +103,6 @@ public class Employee {
         if (operation == 3){
             System.out.println("Permission GRANTED to Modify investment portfolio");
         }
-
         if (operation == 7){
             System.out.println("Permission GRANTED to View private consumer instruments");
         }
@@ -138,10 +137,10 @@ public class Employee {
         if (operation == 2){
             System.out.println("Permission GRANTED to View investment portfolio");
         }
-
         if (operation == 0){
             System.out.println("User: "+username+" is successfully logged out");
-            System.exit(0);}}
+            System.exit(0);}
+    }
 
 
     public static void main(String[] args) throws IOException {

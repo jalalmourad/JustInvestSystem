@@ -2,6 +2,7 @@
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class JustInvestSystem
@@ -204,19 +205,19 @@ public class JustInvestSystem
 
     //Assign permissions for users
     public String permissions(int userID){
-        if (userID == 1){
+        if (userID == Roles.CLIENT.getValue()){
             return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(3);
         }
-        if (userID == 2){
+        if (userID == Roles.PREMIUM_CLIENT.getValue()){
             return returnPermissionID(2)+", "+returnPermissionID(4);
         }
-        if (userID == 3){
+        if (userID == Roles.FINANCIAL_ADVISOR.getValue()){
             return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(6);
         }
-        if (userID == 4){
+        if (userID == Roles.FINANCIAL_PLANNER.getValue()){
             return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(5)+", "+returnPermissionID(6);
         }
-        if (userID == 5){
+        if (userID == Roles.TELLER.getValue()){
             return returnPermissionID(0)+", "+returnPermissionID(1);
         }
         return "No Permissions";
@@ -251,14 +252,6 @@ public class JustInvestSystem
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
         JustInvestSystem sys = new JustInvestSystem();
         //sys.systemIntro();
-
-        //System.out.println(sys.userRole("jalal"));
-
-        //sys.userSignUp("Jalali","Jalal123!");
-        //sys.userSignUp("Alexw","Test12wz$");
-
-        //System.out.println(sys.userAlreadyExists("Jalalo"));
-        //sys.userLogin("Jalal","Jalal!123");
 
     }
 

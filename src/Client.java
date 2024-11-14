@@ -121,7 +121,6 @@ public class Client {
         if (operation == 3){
             System.out.println("Permission GRANTED to Modify investment portfolio");
         }
-
         if (operation == 5){
             System.out.println("Permission GRANTED to View Financial Planner contact info");
             this.getFinancialPlannerDetails(username);
