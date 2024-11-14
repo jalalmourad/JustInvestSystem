@@ -1,6 +1,0 @@
-JalalTESTT,adisor,AdvisorTEST,123456
-Jalalmrad,adisor,AdvisorTEST,123456
-clientTest,adisor,AdvisorTEST,123456
-client2,samantha,samanthaSmith,14626372
-nanan,adisor,AdvisorTEST,123456
-uaua,adv,jalal,123

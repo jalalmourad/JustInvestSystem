@@ -8,7 +8,8 @@ public class Main {
         JustInvestSystem system = new JustInvestSystem();
 
         Scanner sc = new Scanner(System.in);
-        Employee employee = new Employee();
+
+        AccessControl ac = new AccessControl();
 
 
         system.systemIntro();
@@ -38,7 +39,6 @@ public class Main {
                 }
                 sc.nextLine();
 
-
                 System.out.println("Enter username: ");
                 String username = sc.nextLine();
 
@@ -46,16 +46,6 @@ public class Main {
                 System.out.println("Enter password: ");
                 String password = sc.nextLine();
 
-                if (role == Roles.FINANCIAL_ADVISOR.getValue() || role == Roles.FINANCIAL_PLANNER.getValue()) {
-                    System.out.println("Please add your contact details:");
-                    System.out.println("Enter Your Name: ");
-                    String name = sc.nextLine();
-
-                    System.out.println("Enter Your PhoneNumber: ");
-                    String phoneNumber = sc.nextLine();
-
-                    employee.contactDetails(username, name, phoneNumber, role);
-                }
 
                 system.userSignUp(username, password, role);
 
@@ -91,50 +81,48 @@ public class Main {
                     //If user is a Client
                     while (system.userRole(username) == Roles.CLIENT.getValue()) {
                         System.out.println(username + " is logged in as: Client");
-                        Client client = new Client();
-                        System.out.println("Your Authorized Operations Are: " + system.permissions(system.userRole(username)));
+                        System.out.println("Your Authorized Operations Are: " + ac.permissions(system.userRole(username)));
                         system.printInfo();
                         int operation = sc.nextInt();
                         sc.nextLine();
-                        client.clientAccessControl(operation, username);
+                        ac.accessControl(Roles.CLIENT.name(), operation,username);
                     }
                     //If user is a Premium Client
                     while (system.userRole(username) == Roles.PREMIUM_CLIENT.getValue()) {
                         System.out.println(username + " is logged in as: Premium Client");
-                        Client client = new Client();
-                        System.out.println("Your Authorized Operations Are: " + system.permissions(system.userRole(username)));
+                        System.out.println("Your Authorized Operations Are: " + ac.permissions(system.userRole(username)));
                         system.printInfo();
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        client.premiumClientAccessControl(operation, username);
+                        ac.accessControl(Roles.PREMIUM_CLIENT.name(), operation,username);
                     }
                     while (system.userRole(username) == Roles.FINANCIAL_ADVISOR.getValue()) {
                         System.out.println(username + " is logged in as: Financial Advisor");
-                        System.out.println("Your Authorized Operations Are: " + system.permissions(system.userRole(username)));
+                        System.out.println("Your Authorized Operations Are: " + ac.permissions(system.userRole(username)));
                         system.printInfo();
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        employee.financialAdvisorAccessControl(operation, username);
+                        ac.accessControl(Roles.FINANCIAL_ADVISOR.name(), operation,username);
                     }
                     while (system.userRole(username) == Roles.FINANCIAL_PLANNER.getValue()) {
                         System.out.println(username + " is logged in as: Financial Planner");
-                        System.out.println("Your Authorized Operations Are: " + system.permissions(system.userRole(username)));
+                        System.out.println("Your Authorized Operations Are: " + ac.permissions(system.userRole(username)));
                         system.printInfo();
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        employee.financialPlannerAccessControl(operation, username);
+                        ac.accessControl(Roles.FINANCIAL_PLANNER.name(), operation,username);
                     }
                     while (system.userRole(username) == Roles.TELLER.getValue()) {
                         System.out.println(username + " is logged in as: Teller");
-                        System.out.println("Your Authorized Operations Are: " + system.permissions(system.userRole(username)));
+                        System.out.println("Your Authorized Operations Are: " + ac.permissions(system.userRole(username)));
                         system.printInfo();
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        employee.tellerAccessControl(operation,username);
+                        ac.accessControl(Roles.TELLER.name(), operation,username);
                     }
 
 

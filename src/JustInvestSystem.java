@@ -9,14 +9,9 @@ public class JustInvestSystem
 {
     PasswordGenerator passwordGenerator;
     boolean userHasAccess = false;
-    Client client;
-    Employee employee;
-
 
     public JustInvestSystem(){
         passwordGenerator = new PasswordGenerator();
-        client = new Client();
-        employee = new Employee();
     }
 
     public void userSignUp(String username,String password, int role) throws NoSuchAlgorithmException, IOException {
@@ -91,16 +86,6 @@ public class JustInvestSystem
                     writer.newLine();
                     System.out.println("User Created Successfully!");
                     System.out.println("\033[92mPlease Login with the user You Created\033[0m");
-
-                    if (role == 1 || role == 2){
-                        client.addUserBalance(username);
-                    }
-                    if (role == 1){
-                        employee.returnRandomFinancialAdvisor(username);
-                    }
-                    if (role == 2){
-                        employee.returnRandomFinancialPlanner(username);
-                    }
 
                     writer.close();
         }
@@ -189,39 +174,6 @@ public class JustInvestSystem
                 "7. View private consumer instruments");
     }
 
-
-
-    public String returnPermissionID(int permissionIndex){
-        ArrayList<String> permissions = new ArrayList<>();
-        permissions.add("1");
-        permissions.add("2");
-        permissions.add("3");
-        permissions.add("4");
-        permissions.add("5");
-        permissions.add("6");
-        permissions.add("7");
-        return permissions.get(permissionIndex);
-    }
-
-    //Assign permissions for users
-    public String permissions(int userID){
-        if (userID == Roles.CLIENT.getValue()){
-            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(3);
-        }
-        if (userID == Roles.PREMIUM_CLIENT.getValue()){
-            return returnPermissionID(2)+", "+returnPermissionID(4);
-        }
-        if (userID == Roles.FINANCIAL_ADVISOR.getValue()){
-            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(6);
-        }
-        if (userID == Roles.FINANCIAL_PLANNER.getValue()){
-            return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(2)+", "+returnPermissionID(5)+", "+returnPermissionID(6);
-        }
-        if (userID == Roles.TELLER.getValue()){
-            return returnPermissionID(0)+", "+returnPermissionID(1);
-        }
-        return "No Permissions";
-    }
 
     public void printInfo(){
         System.out.println("Enter 0 to Log out");
