@@ -19,13 +19,13 @@ public class AccessControl {
 
     private static final Map<Integer, String> OPERATION_DESCRIPTIONS = new HashMap<>();
     static {
-        OPERATION_DESCRIPTIONS.put(1, "Permission GRANTED to View account balance");
-        OPERATION_DESCRIPTIONS.put(2, "Permission GRANTED to View investment portfolio");
-        OPERATION_DESCRIPTIONS.put(3, "Permission GRANTED to Modify investment portfolio");
-        OPERATION_DESCRIPTIONS.put(4, "Permission GRANTED to View Financial Advisor contact info");
-        OPERATION_DESCRIPTIONS.put(5, "Permission GRANTED to View Financial Planner contact info");
-        OPERATION_DESCRIPTIONS.put(6, "Permission GRANTED to View money market instruments");
-        OPERATION_DESCRIPTIONS.put(7, "Permission GRANTED to View private consumer instruments");
+        OPERATION_DESCRIPTIONS.put(1, "Permission \u001B[32mGRANTED\u001B[0m to View account balance");
+        OPERATION_DESCRIPTIONS.put(2, "Permission \u001B[32mGRANTED\u001B[0m to View investment portfolio");
+        OPERATION_DESCRIPTIONS.put(3, "Permission \u001B[32mGRANTED\u001B[0m to Modify investment portfolio");
+        OPERATION_DESCRIPTIONS.put(4, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Advisor contact info");
+        OPERATION_DESCRIPTIONS.put(5, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Planner contact info");
+        OPERATION_DESCRIPTIONS.put(6, "Permission \u001B[32mGRANTED\u001B[0m to View money market instruments");
+        OPERATION_DESCRIPTIONS.put(7, "Permission \u001B[32mGRANTED\u001B[0m to View private consumer instruments");
         OPERATION_DESCRIPTIONS.put(0, "User successfully logged out");
     }
 
@@ -40,7 +40,7 @@ public class AccessControl {
         if (permissions != null && permissions.contains(operation)) {
             System.out.println(OPERATION_DESCRIPTIONS.getOrDefault(operation, "Operation Not Available"));
         } else {
-            System.out.println("Permission DENIED for this operation.");
+            System.out.println("Permission \u001B[31mDENIED\u001B[0m for this operation.");
         }
     }
 
