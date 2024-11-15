@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class AccessControl {
 
+    //the set of Integer holds the Roles
     private static final Map< String, Set<Integer> > ROLE_PERMISSIONS = new HashMap<>();
     private static final Map<Integer, String> OPERATION_DESCRIPTIONS = new HashMap<>();
 
@@ -31,13 +32,10 @@ public class AccessControl {
     public void accessControl(String role,int operation,String username) {
         if (operation == 0) {
             System.out.println("User: " + username + " is successfully logged out");
-            System.exit(0);
-        }
-
+            System.exit(0);}
         Set<Integer> permissions = ROLE_PERMISSIONS.get(role.toUpperCase());
-
         if (permissions != null && permissions.contains(operation)) {
-            System.out.println(OPERATION_DESCRIPTIONS.getOrDefault(operation, "\u001B[31mOperation not available\u001B"));
+            System.out.println(OPERATION_DESCRIPTIONS.get(operation));
         } else {
             System.out.println("Permission \u001B[31mDENIED\u001B[0m for this operation.");
         }
