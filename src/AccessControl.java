@@ -12,20 +12,20 @@ public class AccessControl {
      *This contains the roles of each user and the set of their corresponding permissions
      * It also has a description for each permission
      */
-    static {
+
+    public AccessControl(){
         permissions.put(Roles.CLIENT.name(),Set.of(1,2,4));
         permissions.put(Roles.PREMIUM_CLIENT.name(), Set.of(3,5));
-        permissions.put(Roles.FINANCIAL_ADVISOR.name(), Set.of(1, 2, 3, 7));
-        permissions.put(Roles.FINANCIAL_PLANNER.name(), Set.of(1, 2, 3, 6, 7));
-        permissions.put(Roles.TELLER.name(), Set.of(1, 2));
-
-        descriptions.put(1, "Permission \u001B[32mGRANTED\u001B[0m to View account balance");
-        descriptions.put(2, "Permission \u001B[32mGRANTED\u001B[0m to View investment portfolio");
-        descriptions.put(3, "Permission \u001B[32mGRANTED\u001B[0m to Modify investment portfolio");
-        descriptions.put(4, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Advisor contact info");
-        descriptions.put(5, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Planner contact info");
+        permissions.put(Roles.FINANCIAL_ADVISOR.name(),Set.of(1, 2, 3, 7));
+        permissions.put(Roles.FINANCIAL_PLANNER.name(),Set.of(1,2,3,6,7));
+        permissions.put(Roles.TELLER.name(), Set.of(1,2));
+        descriptions.put(1,"Permission \u001B[32mGRANTED\u001B[0m to View account balance");
+        descriptions.put(2,"Permission \u001B[32mGRANTED\u001B[0m to View investment portfolio");
+        descriptions.put(3,"Permission \u001B[32mGRANTED\u001B[0m to Modify investment portfolio");
+        descriptions.put(4,"Permission \u001B[32mGRANTED\u001B[0m to View Financial Advisor contact info");
+        descriptions.put(5,"Permission \u001B[32mGRANTED\u001B[0m to View Financial Planner contact info");
         descriptions.put(6, "Permission \u001B[32mGRANTED\u001B[0m to View money market instruments");
-        descriptions.put(7, "Permission \u001B[32mGRANTED\u001B[0m to View private consumer instruments");
+        descriptions.put(7,"Permission \u001B[32mGRANTED\u001B[0m to View private consumer instruments");
         descriptions.put(0, "User successfully logged out");
     }
 
