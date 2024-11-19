@@ -1,9 +1,6 @@
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 public class JustInvestSystem
 {
@@ -14,6 +11,9 @@ public class JustInvestSystem
         passwordGenerator = new PasswordGenerator();
     }
 
+    /**
+     *This method is responsible for user sign up
+     */
     public void userSignUp(String username,String password, int role) throws NoSuchAlgorithmException, IOException {
 
         boolean len= false, uppercase= false, numerical= false, lowercase = false, specialChar = false, denylist = false ,usernameMatching = false;
@@ -75,7 +75,7 @@ public class JustInvestSystem
             System.out.println("\u001B[31mYour password should not match your username\u001B[0m");
         }
 
-        if (len && uppercase && numerical && lowercase && specialChar && usernameMatching && denylist && !userAlreadyExists(username)){
+        if (len && uppercase && numerical &&lowercase && specialChar && usernameMatching && denylist && !userAlreadyExists(username)){
 
             String salt= passwordGenerator.createSalt();
             String writtenString = username+","+salt+","+passwordGenerator.hashedPasswordWithSaltChecker(password,salt)+","+role;
@@ -96,6 +96,9 @@ public class JustInvestSystem
 
     }
 
+    /**
+     *This method is responsible for the user login
+     */
     public void userLogin(String username, String password) throws IOException, NoSuchAlgorithmException {
 
         BufferedReader reader = new BufferedReader(new FileReader("passwd.txt"));
@@ -119,15 +122,13 @@ public class JustInvestSystem
                     }
                 }
         }
-
         if(!foundUser) {
             System.out.println("User Not Found!");
         }
     }
-
-
-
-    //Returns the role of the user
+    /**
+     *This method returns the role of the user
+     */
     public int userRole(String username) throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader("passwd.txt"));
@@ -147,11 +148,9 @@ public class JustInvestSystem
                 role = Integer.parseInt(userRole);
             }
         }
-
         if (!foundUser) {
             System.out.println("User Not Found!");
         }
-
         return role;
     }
 
@@ -199,13 +198,5 @@ public class JustInvestSystem
         psswdReader.close();
         return usernameExists;
     }
-
-
-    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        JustInvestSystem sys = new JustInvestSystem();
-        //sys.systemIntro();
-
-    }
-
 
 }

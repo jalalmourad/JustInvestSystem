@@ -6,11 +6,8 @@ public class Main {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 
         JustInvestSystem system = new JustInvestSystem();
-
         Scanner sc = new Scanner(System.in);
-
         AccessControl accessControl = new AccessControl();
-
         system.systemIntro();
         System.out.println("\n");
 
@@ -40,10 +37,8 @@ public class Main {
                 System.out.println("Enter username: ");
                 String username = sc.nextLine();
 
-
                 System.out.println("Enter password: ");
                 String password = sc.nextLine();
-
 
                 system.userSignUp(username, password, role);
 
@@ -78,7 +73,7 @@ public class Main {
                         system.printInfo();
                         int operation = sc.nextInt();
                         sc.nextLine();
-                        accessControl.accessControl(Roles.CLIENT.name(), operation,username);
+                        accessControl.accessControl(Roles.CLIENT.name(), operation, username);
                     }
                     //If user is a Premium Client
                     while (system.userRole(username) == Roles.PREMIUM_CLIENT.getValue()) {
@@ -88,7 +83,7 @@ public class Main {
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        accessControl.accessControl(Roles.PREMIUM_CLIENT.name(), operation,username);
+                        accessControl.accessControl(Roles.PREMIUM_CLIENT.name(), operation, username);
                     }
                     while (system.userRole(username) == Roles.FINANCIAL_ADVISOR.getValue()) {
                         System.out.println(username + " is logged in as: Financial Advisor\n");
@@ -97,7 +92,7 @@ public class Main {
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        accessControl.accessControl(Roles.FINANCIAL_ADVISOR.name(), operation,username);
+                        accessControl.accessControl(Roles.FINANCIAL_ADVISOR.name(), operation, username);
                     }
                     while (system.userRole(username) == Roles.FINANCIAL_PLANNER.getValue()) {
                         System.out.println(username + " is logged in as: Financial Planner\n");
@@ -106,19 +101,48 @@ public class Main {
                         int operation = sc.nextInt();
                         sc.nextLine();
 
-                        accessControl.accessControl(Roles.FINANCIAL_PLANNER.name(), operation,username);
+                        accessControl.accessControl(Roles.FINANCIAL_PLANNER.name(), operation, username);
                     }
-                    while (system.userRole(username) == Roles.TELLER.getValue()) {
-                        System.out.println(username + " is logged in as: Teller\n");
-                        System.out.println("Your Authorized Operations Are: " + accessControl.permissions(system.userRole(username)));
-                        system.printInfo();
-                        int operation = sc.nextInt();
-                        sc.nextLine();
 
-                        accessControl.accessControl(Roles.TELLER.name(), operation,username);
+                    if (system.userRole(username) == Roles.TELLER.getValue()) {
+                        System.out.println("What is the current time: ");
+                        int time = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Please input : AM or PM");
+                        String amPm = sc.next().toUpperCase();
+
+                        boolean canWork = false;
+
+                        if (amPm.equals("PM")) {
+                            if (time == 12 || time >= 1 && time <= 5) {
+                                canWork = true;
+                            }
+                        }
+
+                        if (amPm.equals("AM")) {
+                            if (time >= 9 && time <= 11) {
+                                canWork = true;
+                            }
+                        }
+                        if (canWork) {
+                        while (system.userRole(username) == Roles.TELLER.getValue()) {
+                            System.out.println(username + " is logged in as: Teller\n");
+                                System.out.println("Current time is: " + time + " " + amPm);
+                                System.out.println("Your Authorized Operations Are: " + accessControl.permissions(system.userRole(username)));
+                                system.printInfo();
+                                int operation = sc.nextInt();
+                                sc.nextLine();
+
+                                accessControl.accessControl(Roles.TELLER.name(), operation, username);
+                            }
+                        }
+                        else {
+                            System.out.println("Teller Cannot work outside of working hours.");
+                        }
+
                     }
-                }
-            } else {
+
+                }} else {
                 System.out.println("Invalid Input!");
             }
         }

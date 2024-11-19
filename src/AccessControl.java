@@ -1,6 +1,3 @@
-import jdk.dynalink.Operation;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,35 +5,42 @@ import java.util.Set;
 
 public class AccessControl {
 
-    //the set of Integer holds the Roles
-    private static final Map< String, Set<Integer> > ROLE_PERMISSIONS = new HashMap<>();
-    private static final Map<Integer, String> OPERATION_DESCRIPTIONS = new HashMap<>();
+    private static final Map< String, Set<Integer> > permissions = new HashMap<>();
+    private static final Map<Integer, String> descriptions = new HashMap<>();
 
+    /**
+     *This contains the roles of each user and the set of their corresponding permissions
+     * It also has a description for each permission
+     */
     static {
-        ROLE_PERMISSIONS.put(Roles.CLIENT.name(),Set.of(1,2,4));
-        ROLE_PERMISSIONS.put(Roles.PREMIUM_CLIENT.name(), Set.of(3,5));
-        ROLE_PERMISSIONS.put(Roles.FINANCIAL_ADVISOR.name(), Set.of(1, 2, 3, 7));
-        ROLE_PERMISSIONS.put(Roles.FINANCIAL_PLANNER.name(), Set.of(1, 2, 3, 6, 7));
-        ROLE_PERMISSIONS.put(Roles.TELLER.name(), Set.of(1, 2));
+        permissions.put(Roles.CLIENT.name(),Set.of(1,2,4));
+        permissions.put(Roles.PREMIUM_CLIENT.name(), Set.of(3,5));
+        permissions.put(Roles.FINANCIAL_ADVISOR.name(), Set.of(1, 2, 3, 7));
+        permissions.put(Roles.FINANCIAL_PLANNER.name(), Set.of(1, 2, 3, 6, 7));
+        permissions.put(Roles.TELLER.name(), Set.of(1, 2));
 
-        OPERATION_DESCRIPTIONS.put(1, "Permission \u001B[32mGRANTED\u001B[0m to View account balance");
-        OPERATION_DESCRIPTIONS.put(2, "Permission \u001B[32mGRANTED\u001B[0m to View investment portfolio");
-        OPERATION_DESCRIPTIONS.put(3, "Permission \u001B[32mGRANTED\u001B[0m to Modify investment portfolio");
-        OPERATION_DESCRIPTIONS.put(4, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Advisor contact info");
-        OPERATION_DESCRIPTIONS.put(5, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Planner contact info");
-        OPERATION_DESCRIPTIONS.put(6, "Permission \u001B[32mGRANTED\u001B[0m to View money market instruments");
-        OPERATION_DESCRIPTIONS.put(7, "Permission \u001B[32mGRANTED\u001B[0m to View private consumer instruments");
-        OPERATION_DESCRIPTIONS.put(0, "User successfully logged out");
+        descriptions.put(1, "Permission \u001B[32mGRANTED\u001B[0m to View account balance");
+        descriptions.put(2, "Permission \u001B[32mGRANTED\u001B[0m to View investment portfolio");
+        descriptions.put(3, "Permission \u001B[32mGRANTED\u001B[0m to Modify investment portfolio");
+        descriptions.put(4, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Advisor contact info");
+        descriptions.put(5, "Permission \u001B[32mGRANTED\u001B[0m to View Financial Planner contact info");
+        descriptions.put(6, "Permission \u001B[32mGRANTED\u001B[0m to View money market instruments");
+        descriptions.put(7, "Permission \u001B[32mGRANTED\u001B[0m to View private consumer instruments");
+        descriptions.put(0, "User successfully logged out");
     }
 
+    /**
+     *This method is responsible access control
+     */
     public void accessControl(String role,int operation,String username) {
-        if (operation == 0) {
-            System.out.println("User: " + username + " is successfully logged out");
-            System.exit(0);}
-        Set<Integer> permissions = ROLE_PERMISSIONS.get(role.toUpperCase());
-        if (permissions != null && permissions.contains(operation)) {
-            System.out.println(OPERATION_DESCRIPTIONS.get(operation));
-        } else {
+        if (operation ==0){
+            System.out.println("User: " +username+" is successfully logged out");
+            System.exit(0);
+        }
+        Set<Integer> permissions= AccessControl.permissions.get(role.toUpperCase());
+        if (permissions !=null&& permissions.contains(operation)) {
+            System.out.println(descriptions.get(operation));
+        }else{
             System.out.println("Permission \u001B[31mDENIED\u001B[0m for this operation.");
         }
     }
@@ -53,7 +57,9 @@ public class AccessControl {
         return permissions.get(permissionIndex);
     }
 
-    //This method is used to assign permissions for users
+    /**
+     * This method returns the permissions that are granted for each user
+     */
     public String permissions(int userID){
         if (userID == Roles.CLIENT.getValue()){
             return returnPermissionID(0)+", "+returnPermissionID(1)+", "+returnPermissionID(3);
@@ -73,8 +79,4 @@ public class AccessControl {
         return "No Permissions";
     }
 
-
-    public static void main(String[] args) throws IOException {
-        AccessControl accessControl = new AccessControl();
-    }
 }
