@@ -3,7 +3,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class JustInvestSystemTest {
 
@@ -21,13 +20,11 @@ public class JustInvestSystemTest {
         AccessControl accessControl = new AccessControl();
         //Login
         system.userLogin("SashaKim","Sasha1234!");
-
         System.out.println("CLIENT permissions: ");
         System.out.println("Expected value for the following operations: GRANTED, Real value:");
         accessControl.accessControl(Roles.CLIENT.name(), 1, "SashaKim");
         accessControl.accessControl(Roles.CLIENT.name(), 2, "SashaKim");
         accessControl.accessControl(Roles.CLIENT.name(), 4, "SashaKim");
-
         System.out.println("Expected value for the following operations: DENIED, Real value:");
         accessControl.accessControl(Roles.CLIENT.name(), 5, "SashaKim");
         accessControl.accessControl(Roles.CLIENT.name(), 3, "SashaKim");
