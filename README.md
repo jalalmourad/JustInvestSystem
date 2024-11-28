@@ -25,6 +25,9 @@ it writes the usernames, passwords, and roles of the users in passwd.txt. This c
 SHA-256 algorithm. This covers Problem 2.
 > Roles.java: This class is responsible for The roles of each User.
 
+
+>To test Teller Login system, Please enter time in 12h format. (no minutes included)
+> 
 Steps:
 ------
 To be able to run the program on the VM:
