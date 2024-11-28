@@ -4,7 +4,7 @@ JustInvestSystem
 Description:
 --------------
 
-This project contains 5 java classes, 6.txt file, and 1 ReadMe.txt file.
+This project contains 5 java classes, 2.txt file, and 1 ReadMe.txt file.
 
 Assignment 1:
 In this assignment, we are creating a 
@@ -17,18 +17,19 @@ JustInvestSystem.java           A single Java script
 Main.java                       A single Java script
 PasswordGenerator.java          A single Java script
 
-
-Installation:
-----------------
-To be able to run the program, you should have Java 15.0.0 or later installed on your computer.
-
 Usage:
 ----------------
-> Client: This class stores all the client methods
-> Employee:
-> JustInvestSystem:
-> Main:
-> PasswordGenerator:
+To be able to run the program on the VM:
+
+Steps:
+------
+Navigate to src of the project
+Step 1: cd src
+
+Step 2: javac Main.java
+
+To run Main:
+Step 3: java Main
 
 
 Copyright 2024 Jalal Mourad
