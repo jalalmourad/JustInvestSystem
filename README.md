@@ -26,6 +26,7 @@ Steps:
 Navigate to src of the project
 Step 1: cd src
 
+To compile the Main file:
 Step 2: javac Main.java
 
 To run Main:
