@@ -42,4 +42,8 @@ To run Main:
 >Step 3: java Main
 
 
+>When you unzip the folder it might create JustInvestSystem folder inside another JustInvestSystem folder, 
+please make sure that you run the code from the inner JustInvestSystem directory so that you don't run into any (file not found error).
+
+
 Copyright 2024 Jalal Mourad
