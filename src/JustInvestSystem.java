@@ -1,11 +1,16 @@
 
 import java.io.*;
+import java.nio.file.FileSystem;
 import java.security.NoSuchAlgorithmException;
+
 
 public class JustInvestSystem
 {
     PasswordGenerator passwordGenerator;
     boolean userHasAccess = false;
+
+    String directory = System.getProperty("user.dir");
+
 
     public JustInvestSystem(){
         passwordGenerator = new PasswordGenerator();
@@ -18,23 +23,23 @@ public class JustInvestSystem
 
         boolean len= false, uppercase= false, numerical= false, lowercase = false, specialChar = false, denylist = false ,usernameMatching = false;
 
-        BufferedReader reader = new BufferedReader(new FileReader("commonPasswords.txt"));
-            String line;
+        BufferedReader reader = new BufferedReader(new FileReader(directory+"/JustInvestSystem/src/commonPasswords.txt"));
+        String line;
 
-            //to check if the password is in the denylist (commonPasswords.txt)
-            while ((line = reader.readLine()) != null) {
-                String[] passwords = line.split(",");
+        //to check if the password is in the denylist (commonPasswords.txt)
+        while ((line = reader.readLine()) != null) {
+            String[] passwords = line.split(",");
 
-                for (String p:passwords){
-                    if (p.equals(password)){
-                        System.out.println("\u001B[31mYour password is in a list of common weak passwords\u001B[0m");
-                    }
-                    else {
-                        denylist = true;
-                    }
+            for (String p:passwords){
+                if (p.equals(password)){
+                    System.out.println("\u001B[31mYour password is in a list of common weak passwords\u001B[0m");
+                }
+                else {
+                    denylist = true;
                 }
             }
-            reader.close();
+        }
+        reader.close();
 
         if (password.length() > 8 && password.length()<12 ){
             len = true;
@@ -81,13 +86,13 @@ public class JustInvestSystem
             String writtenString = username+","+salt+","+passwordGenerator.hashedPasswordWithSaltChecker(password,salt)+","+role;
 
             //if the conditions are met, create a new user.
-            BufferedWriter writer = new BufferedWriter(new FileWriter("passwd.txt", true));
-                    writer.write(writtenString);
-                    writer.newLine();
-                    System.out.println("User Created Successfully!");
-                    System.out.println("\033[92mPlease Login with the user You Created\033[0m");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(directory+"/JustInvestSystem/src/passwd.txt", true));
+            writer.write(writtenString);
+            writer.newLine();
+            System.out.println("User Created Successfully!");
+            System.out.println("\033[92mPlease Login with the user You Created\033[0m");
 
-                    writer.close();
+            writer.close();
         }
         else {
 
@@ -101,7 +106,7 @@ public class JustInvestSystem
      */
     public void userLogin(String username, String password) throws IOException, NoSuchAlgorithmException {
 
-        BufferedReader reader = new BufferedReader(new FileReader("passwd.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(directory+"/JustInvestSystem/src/passwd.txt"));
         String line;
         boolean foundUser = false;
 
@@ -111,16 +116,16 @@ public class JustInvestSystem
             String fileSalt = userInfo[1];
             String hashedPass = userInfo[2];
 
-                if (username.equals(fileUserName)){
-                    foundUser = true;
-                    if (passwordGenerator.hashedPasswordWithSaltChecker(password,fileSalt).equals(hashedPass)){
-                        System.out.println("ACCESS GRANTED!");
-                        userHasAccess = true;
-                    }
-                    else {
-                        System.out.println("ACCESS DENIED");
-                    }
+            if (username.equals(fileUserName)){
+                foundUser = true;
+                if (passwordGenerator.hashedPasswordWithSaltChecker(password,fileSalt).equals(hashedPass)){
+                    System.out.println("ACCESS GRANTED!");
+                    userHasAccess = true;
                 }
+                else {
+                    System.out.println("ACCESS DENIED");
+                }
+            }
         }
         if(!foundUser) {
             System.out.println("User Not Found!");
@@ -131,7 +136,7 @@ public class JustInvestSystem
      */
     public int userRole(String username) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new FileReader("passwd.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(directory+"/JustInvestSystem/src/passwd.txt"));
         String line;
         boolean foundUser = false;
 
@@ -182,7 +187,7 @@ public class JustInvestSystem
     public boolean userAlreadyExists(String username) throws IOException {
 
         boolean usernameExists = false;
-        BufferedReader psswdReader = new BufferedReader(new FileReader("passwd.txt"));
+        BufferedReader psswdReader = new BufferedReader(new FileReader(directory+"/JustInvestSystem/src/passwd.txt"));
         String lineReader;
 
         //to check if the user already exists
