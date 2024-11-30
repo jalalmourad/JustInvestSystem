@@ -86,7 +86,7 @@ public class JustInvestSystem
             String writtenString = username+","+salt+","+passwordGenerator.hashedPasswordWithSaltChecker(password,salt)+","+role;
 
             //if the conditions are met, create a new user.
-            BufferedWriter writer = new BufferedWriter(new FileWriter(directory+"/src/passwd.txt", true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("passwd.txt", true));
             writer.write(writtenString);
             writer.newLine();
             System.out.println("User Created Successfully!");
